@@ -6,10 +6,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author czz
@@ -20,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "MarkDown测试接口",tags = "测试客户端")
 public class MarkDownTest {
 
-    @PostMapping("json")
-    @ApiOperation(value = "返回json",notes = "测试接口")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "name",value = "客户名称"),
-            @ApiImplicitParam(name = "id",value = "客户id")
-    })
-    public ResponseEntity<String> markDown(@RequestBody User user){
+    @PostMapping("json/{kgName}")
+//    @ApiOperation(value = "返回json",notes = "测试接口")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "name",value = "客户名称"),
+//            @ApiImplicitParam(name = "id",value = "客户id")
+//    })
+    public ResponseEntity<String> markDown(@PathVariable String kgName,
+                                           @RequestBody User user){
         String json="{\"success\":{\"message\":\"HelloWorld:"+user.getName()+"\",\"status_code\":200}}";
         return ResponseEntity.ok(json);
     }
